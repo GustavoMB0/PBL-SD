@@ -2,7 +2,7 @@
 
   Para compilar os codigos basta executar os seguintes comandos:
   
-  as -o garage.o garage.s
+    as -o garage.o garage.s
   
     gcc -o garage garage.o
   
