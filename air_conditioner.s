@@ -156,12 +156,18 @@ turn_on:
 	// Verifica se a temperatura chegou em 17 graus
 	cmp r5, #1
 	cmpeq r6, #5
-	blt temp_termopar
+	ble temp_termopar
 
 	// Caso ar não tenha sido desligado devido ao termopar liga ele
 	mov r0, #1
 	ldr r9, addr_isOn
 	str r0, [r9]
+	
+	//Verifica se o termopar o ar foi desligado pelo termopar
+	ldr r5, addr_termopar
+	ldr r5, [r5]
+	cmp r5, #1
+	beq temp_termopar
 	
 	// Printa o resultado
 	ldr r0, addr_query
@@ -176,6 +182,7 @@ turn_on:
 	
 	ldr r9, addr_temperature
 	str r5, [r9]
+	ldr r9, addr_termopar
 	
 	//Reseta o tempo em que a pessoa deixou o ambiente
 	mov r6, #10
